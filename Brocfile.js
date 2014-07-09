@@ -19,8 +19,10 @@ var index = pickFiles(app, {
   destDir: dest
 });
 
+app = reactify(app, {
+  extensions: ['js']
+});
 app = esnextify(app);
-app = reactify(app);
 
 var styles = pickFiles('app/styles', {
   srcDir: '/',
