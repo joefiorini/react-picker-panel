@@ -5,6 +5,11 @@
 // 3. Implement a second panel
 // 4. Style it
 //
+
+function ComponentState(visible, component) {
+  return { isVisible: visible, component: component };
+}
+
 var PickerContainer = React.createClass({
   getInitialState: function() {
     return {panelIsOpen: false};
@@ -19,14 +24,27 @@ var PickerContainer = React.createClass({
   render: function() {
     /* jshint ignore:start */
 
-    var a = [<PanelTrigger currentStatus={this.props.currentStatus} onOpenPanel={this.openPanel} />];
+    var states = [
+      ComponentState(true, <PanelTrigger
+              currentStatus={this.props.currentStatus}
+              onOpenPanel={this.openPanel} />),
 
-    if(this.state.panelIsOpen) {
-      a.push(<TransitionOptionsContainer currentStatus={this.props.currentStatus} availableTransitions={this.props.availableTransitions} onSelect={this.valueSelected} />);
-    }
+      ComponentState(this.state.panelIsOpen,
+        <TransitionOptionsContainer
+          currentStatus={this.props.currentStatus}
+          availableTransitions={this.props.availableTransitions}
+          onSelect={this.valueSelected} />)
+    ];
+
+    var components =
+      states.filter(function(state) {
+        return state.isVisible;
+      }).map(function(state) {
+        return state.component;
+      });
 
     return (<div className="picker-container">
-      {a}
+      {components}
     </div>);
     /* jshint ignore:end */
   }
@@ -56,7 +74,6 @@ var TransitionOptionsContainer = React.createClass({
     // Perform transition
     // Send new status to panel value reactor
   render: function() {
-    console.log(this.props.onSelect);
     return (
       <div className="transition-options-panel">
         {this.props.availableTransitions.map(transitionOption.bind(null, this.props.onSelect))}
