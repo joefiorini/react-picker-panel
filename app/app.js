@@ -22,7 +22,7 @@ var PickerContainer = React.createClass({
     var a = [<PanelTrigger currentStatus={this.props.currentStatus} onOpenPanel={this.openPanel} />];
 
     if(this.state.panelIsOpen) {
-      a.push(<PanelContainer currentStatus={this.props.currentStatus} availableTransitions={this.props.availableTransitions} onSelect={this.valueSelected} />);
+      a.push(<TransitionOptionsContainer currentStatus={this.props.currentStatus} availableTransitions={this.props.availableTransitions} onSelect={this.valueSelected} />);
     }
 
     return (<div className="picker-container">
@@ -50,20 +50,6 @@ var PanelTrigger = React.createClass({
 function transitionOption(callback, transition) {
   return (<TransitionOption name={transition} onSelect={callback} />);
 }
-
-var PanelContainer = React.createClass({
-  // Listen on panel value reactor and...
-  //  close
-  render: function() {
-    return (
-      <div className="panel__container">
-        {this.props.currentStatus}
-
-        <TransitionOptionsContainer availableTransitions={this.props.availableTransitions} onSelect={this.props.onSelect} />
-      </div>
-    );
-  }
-});
 
 var TransitionOptionsContainer = React.createClass({
   // Listen for chosen transition and...
