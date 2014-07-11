@@ -68,6 +68,10 @@ var PanelTrigger = React.createClass({
 });
 
 var TransitionOptionsContainer = React.createClass({
+  propTypes: {
+    availableTransitions: React.PropTypes.array.isRequired,
+    onSelect: React.PropTypes.func.isRequired
+  },
   render: function() {
     return (
       <div className="transition-options-panel">
@@ -81,6 +85,10 @@ var TransitionOptionsContainer = React.createClass({
 });
 
 var TransitionOption = React.createClass({
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    onSelect: React.PropTypes.func.isRequired
+  },
   handleClick: function() {
     this.props.onSelect(this.props.name);
   },
