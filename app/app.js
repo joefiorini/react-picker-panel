@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
 
-// 1. Refactor the crap out of this
 // 2. Use a realish backend
 // 3. Implement a second panel
 // 4. Style it
