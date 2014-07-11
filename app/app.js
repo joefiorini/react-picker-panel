@@ -51,8 +51,6 @@ var PickerContainer = React.createClass({
 });
 
 var PanelTrigger = React.createClass({
-  // Listen on panel value reactor and...
-  //  set currentStatus prop to new status
   handleClick: function() {
     this.props.onOpenPanel();
   },
@@ -65,18 +63,13 @@ var PanelTrigger = React.createClass({
   }
 });
 
-function transitionOption(callback, transition) {
-  return (<TransitionOption name={transition} onSelect={callback} />);
-}
-
 var TransitionOptionsContainer = React.createClass({
-  // Listen for chosen transition and...
-    // Perform transition
-    // Send new status to panel value reactor
   render: function() {
     return (
       <div className="transition-options-panel">
-        {this.props.availableTransitions.map(transitionOption.bind(null, this.props.onSelect))}
+        {this.props.availableTransitions.map(transition => <TransitionOption
+                                                              name={transition}
+                                                              onSelect={this.props.onSelect} />)}
       </div>
     );
   }
@@ -85,7 +78,6 @@ var TransitionOptionsContainer = React.createClass({
 var TransitionOption = React.createClass({
   handleClick: function() {
     this.props.onSelect(this.props.name);
-    // Pass selected transition up to parent
   },
   render: function() {
     return (<div className="panel__option" onClick={this.handleClick}>{this.props.name}</div>);
