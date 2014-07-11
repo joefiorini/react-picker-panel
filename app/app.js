@@ -51,6 +51,10 @@ var PickerContainer = React.createClass({
 });
 
 var PanelTrigger = React.createClass({
+  propTypes: {
+    currentStatus: React.PropTypes.string.isRequired,
+    onOpenPanel: React.PropTypes.func.isRequired
+  },
   handleClick: function() {
     this.props.onOpenPanel();
   },
@@ -68,6 +72,7 @@ var TransitionOptionsContainer = React.createClass({
     return (
       <div className="transition-options-panel">
         {this.props.availableTransitions.map(transition => <TransitionOption
+                                                              key={transition}
                                                               name={transition}
                                                               onSelect={this.props.onSelect} />)}
       </div>
